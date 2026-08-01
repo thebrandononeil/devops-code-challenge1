@@ -15,6 +15,7 @@ pipeline {
     }
 
     stages {
+
         stage('Checkout') {
             steps {
                 checkout scm
@@ -34,8 +35,7 @@ pipeline {
         stage('Login to ECR') {
             steps {
                 sh '''
-                    aws ecr get-login-password --region "$AWS_REGION" |
-                    docker login \
+                    aws ecr get-login-password --region "$AWS_REGION" | docker login \
                       --username AWS \
                       --password-stdin "$ECR_REGISTRY"
                 '''
